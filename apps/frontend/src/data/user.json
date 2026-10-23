@@ -1,0 +1,47 @@
+[
+  {
+    "username": "budi.santoso",
+    "password": "Budi123!",
+    "email": "budi.santoso@example.com",
+    "role": "owner",
+    "phoneNumber": "081234567890",
+    "address": "Jl. Merdeka No. 10, Jakarta",
+    "posCode": "10110"
+  },
+  {
+    "username": "siti.aminah",
+    "password": "Siti123!",
+    "email": "siti.aminah@example.com",
+    "role": "cashier",
+    "phoneNumber": "081298765432",
+    "address": "Jl. Mawar No. 25, Bandung",
+    "posCode": "40115"
+  },
+  {
+    "username": "andi.pratama",
+    "password": "Andi123!",
+    "email": "andi.pratama@example.com",
+    "role": "cashier",
+    "phoneNumber": "082112345678",
+    "address": "Jl. Sudirman No. 8, Surabaya",
+    "posCode": "60271"
+  },
+  {
+    "username": "dewi.lestari",
+    "password": "Dewi123!",
+    "email": "dewi.lestari@example.com",
+    "role": "cashier",
+    "phoneNumber": "082298765431",
+    "address": "Jl. Diponegoro No. 17, Yogyakarta",
+    "posCode": "55221"
+  },
+  {
+    "username": "rudi.hartono",
+    "password": "Rudi123!",
+    "email": "rudi.hartono@example.com",
+    "role": "cashier",
+    "phoneNumber": "083812345678",
+    "address": "Jl. Pemuda No. 42, Semarang",
+    "posCode": "50132"
+  }
+]

@@ -1,0 +1,30 @@
+[
+  {
+    "name": "Kemeja Parang Sagara",
+    "price": 385000,
+    "size": "S - XXL",
+    "Rate": "4.9",
+    "deskription": "Kemeja katun premium dengan motif parang klasik yang ditenun ringan untuk keseharian."
+  },
+  {
+    "name": "Outer Kawung Senja",
+    "price": 465000,
+    "size": "M - XL",
+    "Rate": "4.8",
+    "deskription": "Outer modern berpotongan relaxed dengan aksen kawung hangat untuk gaya urban."
+  },
+  {
+    "name": "Blus Sekar Jagad",
+    "price": 329000,
+    "size": "S - XL",
+    "Rate": "4.9",
+    "deskription": "Blus flowy bernuansa sekar jagad dengan siluet feminin dan mudah dipadukan."
+  },
+  {
+    "name": "Kain Lereng Pesisir",
+    "price": 550000,
+    "size": "2.4 m",
+    "Rate": "5.0",
+    "deskription": "Kain batik tulis pilihan dengan palet pesisir yang hidup dan karakter artisan kuat."
+  }
+]
