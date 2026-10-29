@@ -40,7 +40,7 @@ import AppBadge from '@/components/atoms/AppBadge.vue'
         </p>
       </div>
       <div class="flex items-center justify-between text-xs text-slate-400">
-        <span>Retail Flow Batik · Est. 2024</span><ArrowUpRight :size="18" aria-hidden="true" />
+        <span>Retail Flow Batik · Est. 2026</span><ArrowUpRight :size="18" aria-hidden="true" />
       </div>
     </div>
   </section>
