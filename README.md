@@ -298,46 +298,44 @@ Diagram sekuens menampilkan interaksi antar-komponen dari Frontend (Vue 3 / Axio
 ```mermaid
 sequenceDiagram
     autonumber
-    actor Kasir as Kasir / Frontend (Vue 3)
-    participant Filter as JwtAuthenticationFilter
-    participant Controller as TransactionController
-    participant Service as TransactionServiceImpl
-    participant ProductRepo as ProductRepository
-    participant TxRepo as TransactionRepository
-    participant DB as Database (MySQL)
+    actor Kasir as Kasir (Vue 3)
+    participant Filter as JwtAuthFilter
+    participant Controller as TxController
+    participant Service as TxServiceImpl
+    participant ProductRepo as ProductRepo
+    participant TxRepo as TxRepo
+    participant DB as MySQL DB
 
-    Kasir->>Filter: POST /api/v1/transactions (Bearer Token + JSON Payload)
-    Filter->>Filter: Validasi Token & Role (ROLE_CASHIER)
-    Filter->>Controller: Forward Request Terotentikasi
-    Controller->>Service: createTransaction(request)
+    Kasir->>Filter: POST /api/v1/transactions
+    Filter->>Filter: Validasi JWT & Role
+    Filter->>Controller: Forward Request
+    Controller->>Service: createTransaction(req)
 
-    rect rgb(240, 248, 255)
-        note over Service, DB: Batas Transaksi Atomik (@Transactional)
-        Service->>ProductRepo: findProductByIdForUpdate(productId)
-        ProductRepo->>DB: SELECT * FROM product WHERE id = ? FOR UPDATE
-        DB-->>ProductRepo: Data Produk Terkunci
-        ProductRepo-->>Service: Product Entity
+    note over Service, DB: @Transactional & Pessimistic Lock
+    Service->>ProductRepo: findProductByIdForUpdate()
+    ProductRepo->>DB: SELECT FOR UPDATE
+    DB-->>ProductRepo: Data Terkunci
+    ProductRepo-->>Service: Product
 
-        alt Stok Tidak Cukupi (stock < quantity)
-            Service-->>Controller: throw InsufficientStockException
-            Controller-->>Kasir: HTTP 400 Bad Request (Stok Tidak Cukup)
-        else Stok Cukupi
-            Service->>ProductRepo: updateStock(productId, newStock)
-            ProductRepo->>DB: UPDATE product SET stock = ? WHERE id = ?
-            DB-->>ProductRepo: Baris Berhasil Diperbarui
+    alt Stok < Quantity
+        Service-->>Controller: throw InsufficientStockException
+        Controller-->>Kasir: HTTP 400 Bad Request
+    else Stok Cukup
+        Service->>ProductRepo: updateStock()
+        ProductRepo->>DB: UPDATE product stock
+        DB-->>ProductRepo: OK
 
-            Service->>TxRepo: saveTransaction(transaction)
-            TxRepo->>DB: INSERT INTO transactions (...)
-            DB-->>TxRepo: Header Transaksi Tersimpan
+        Service->>TxRepo: saveTransaction()
+        TxRepo->>DB: INSERT transactions
+        DB-->>TxRepo: OK
 
-            Service->>TxRepo: saveTransactionDetail(detail)
-            TxRepo->>DB: INSERT INTO transactions_details (...)
-            DB-->>TxRepo: Detail Transaksi Tersimpan
-        end
+        Service->>TxRepo: saveTransactionDetail()
+        TxRepo->>DB: INSERT details
+        DB-->>TxRepo: OK
+
+        Service-->>Controller: TransactionResponse
+        Controller-->>Kasir: HTTP 201 Created (PAID)
     end
-
-    Service-->>Controller: TransactionResponse (ID Nota, Total, Status PAID)
-    Controller-->>Kasir: HTTP 201 Created (ApiResponse JSON)
 ```
 
 ---
